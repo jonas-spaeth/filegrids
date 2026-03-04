@@ -1,0 +1,38 @@
+[build-system]
+requires = ["hatchling>=1.25"]
+build-backend = "hatchling.build"
+
+[project]
+name = "filegrids"
+version = "0.1.0"
+description = "Pattern-driven nested file grid builder for xarray and virtual datasets"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Jonas Spaeth" }]
+requires-python = ">=3.12"
+dependencies = [
+  "click>=8.1",
+  "numpy>=1.23",
+  "pandas>=1.5",
+]
+
+[project.optional-dependencies]
+xarray = ["xarray>=2023.1.0"]
+virtual = ["virtualizarr>=0.4", "obstore>=0.5"]
+all = ["filegrids[xarray,virtual]"]
+test = ["pytest>=8.0"]
+docs = ["sphinx>=8.0", "furo>=2024.8.6", "sphinx-click>=6.0"]
+
+[project.urls]
+Homepage = "https://github.com/jonas-spaeth/filegrids"
+Repository = "https://github.com/jonas-spaeth/filegrids"
+
+[project.scripts]
+filegrids = "filegrids.cli:main"
+
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/filegrids"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
